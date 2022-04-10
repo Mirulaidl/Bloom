@@ -1,51 +1,40 @@
 package com.example.bloom;
 
-import static android.app.Activity.RESULT_OK;
 import static com.google.firebase.auth.FirebaseAuth.getInstance;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AddItemFragment extends Fragment {
+public class AddItem extends AppCompatActivity {
+
     private Button AddItem;
     private EditText addItemName, addItemPrice;
     private CircleImageView addItemImage;
@@ -54,16 +43,14 @@ public class AddItemFragment extends Fragment {
     private StorageReference storageReference;
     public static String itemNameGlobal;
 
-
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_additem_seller, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_item);
 
-        addItemName = (EditText) view.findViewById(R.id.addItemName);
-        addItemPrice = (EditText) view.findViewById(R.id.addItemPrice);
-        addItemImage = (CircleImageView) view.findViewById(R.id.addItemImage);
+        addItemName = (EditText) findViewById(R.id.addItemName);
+        addItemPrice = (EditText) findViewById(R.id.addItemPrice);
+        addItemImage = (CircleImageView) findViewById(R.id.addItemImage);
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -75,7 +62,7 @@ public class AddItemFragment extends Fragment {
             }
         });
 
-        Button AddItem = view.findViewById(R.id.addButton);
+        Button AddItem = findViewById(R.id.addButton);
         AddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,9 +70,7 @@ public class AddItemFragment extends Fragment {
             }
         });
 
-        return view;
     }
-
     private void addItem() {
         String ItemName = addItemName.getText().toString().trim();
         String ItemPrice = addItemPrice.getText().toString().trim();
@@ -119,13 +104,15 @@ public class AddItemFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
+
+
                 if(task.isSuccessful()){
-                    Toast.makeText(getActivity(),"Item Added",Toast.LENGTH_SHORT).show();
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ListingsFragment()).commit();
+                    Toast.makeText(AddItem.this,"Item Added",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(AddItem.this,ListingPageSeller.class);
+                    startActivity(i);
 
                 }else{
-                    Toast.makeText(getActivity(),"There is something wrong.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText( AddItem.this,"There is something wrong.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -152,7 +139,7 @@ public class AddItemFragment extends Fragment {
 
     private void uploadPicture(){
 
-        final ProgressDialog pd = new ProgressDialog(getContext());
+        final ProgressDialog pd = new ProgressDialog(this);
         pd.setTitle("Uploading Image...");
         pd.show();
 
@@ -165,7 +152,7 @@ public class AddItemFragment extends Fragment {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
-                    } 
+                    }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override

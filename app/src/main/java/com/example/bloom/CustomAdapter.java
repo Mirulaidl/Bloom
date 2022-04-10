@@ -51,7 +51,7 @@ public class CustomAdapter extends FirebaseRecyclerAdapter<Item,CustomAdapter.my
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Item model) {
         holder.ItemName.setText(model.getItemName());
         holder.ItemPrice.setText(model.getItemPrice());
-        holder.imageID.setText(model.getImageID());
+
     }
 
     @NonNull
@@ -63,10 +63,6 @@ public class CustomAdapter extends FirebaseRecyclerAdapter<Item,CustomAdapter.my
 
     class myviewholder extends RecyclerView.ViewHolder
     {
-        CircleImageView itemImage;
-        StorageReference storageReference;
-        ActivityMainBinding binding;
-        ProgressDialog progressDialog;
         TextView ItemName,ItemPrice, imageID;
 
 
@@ -75,7 +71,6 @@ public class CustomAdapter extends FirebaseRecyclerAdapter<Item,CustomAdapter.my
             ItemName=(TextView) itemView.findViewById(R.id.itemName);
             ItemPrice=(TextView) itemView.findViewById(R.id.itemPrice);
             imageID=(TextView) itemView.findViewById(R.id.imageID);
-
 
 
         }

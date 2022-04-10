@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +19,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,102 +31,79 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileActivitySeller extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout drawer;
-    private FirebaseUser user;
-    private DatabaseReference reference;
+public class ProfileActivitySeller extends AppCompatActivity  {
 
-    private String userID;
+    BottomNavigationView bottomNavigationView;
+
+    private RecyclerView recyclerView;
+    private CustomAdapter adapter;
+    private FloatingActionButton addButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_seller);
 
+        bottomNavigationView = findViewById(R.id.bottom_navigator);
+        bottomNavigationView.setSelectedItemId(R.id.listings);
 
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        drawer = findViewById(R.id.drawer_layout_seller);
-        NavigationView navigationView = findViewById(R.id.nav_view_seller);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        //pass value from database ke drawer
-
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("users").child(getInstance().getCurrentUser().getUid());
-        userID = user.getUid();
-
-
-        View headerView = navigationView.getHeaderView(0);
-        final TextView DrawerUsername = (TextView) headerView.findViewById(R.id.nav_display_username);
-        final TextView DrawerFullname = (TextView) headerView.findViewById(R.id.nav_display_fullname);
-        reference.child(userID).addValueEventListener(new ValueEventListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                if(userProfile != null){
-                    String fullname = userProfile.fullname;
-                    String username = userProfile.username;
-
-                    DrawerUsername.setText(username);
-                    DrawerFullname.setText(fullname);
+                switch (item.getItemId())
+                {
+                    case R.id.order:
+                        startActivity(new Intent(getApplicationContext(),Order.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.listings:
+                        return true;
+                    case R.id.sellerProfile:
+                        startActivity(new Intent(getApplicationContext(),SellerProfile.class));
+                        overridePendingTransition(0,0);
+                        return true;
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ProfileActivitySeller.this, "Something wrong happened!", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
+        //recyclerView
+
+        recyclerView = (RecyclerView) findViewById(R.id.listing_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseRecyclerOptions<Item> options =
+                new FirebaseRecyclerOptions.Builder<Item>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("items").child(userID), Item.class)
+                        .build();
+
+        adapter = new CustomAdapter(options);
+        recyclerView.setAdapter(adapter);
+
+        addButton = findViewById(R.id.addItemButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ProfileActivitySeller.this,AddItem.class);
+                startActivity(i);
+            }
+        });
+    }
 
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ListingsFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_listings);
-        }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        adapter.startListening();
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_sellerprofile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SellerProfileFragment()).commit();
-                break;
-            case R.id.nav_listings:
-                startActivity(new Intent(this, ListingPageSeller.class));
-                break;
-            case R.id.nav_orders:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new OrdersFragment()).commit();
-                break;
-            case R.id.nav_info:
-                Toast.makeText(this, "Info", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_logout:
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(ProfileActivitySeller.this, MainActivity.class));
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-
+    public void onStop(){
+        super.onStop();
+        adapter.stopListening();
     }
 }

@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bloom">
         <activity
+            android:name=".Cart"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Order"
+            android:exported="false" />
+        <activity
+            android:name=".SellerProfile"
+            android:exported="false" />
+        <activity
+            android:name=".AddItem"
+            android:exported="false" />
+        <activity
             android:name=".ListingPageSeller"
             android:exported="false" />
         <activity
