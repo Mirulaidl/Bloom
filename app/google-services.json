@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "523585465914",
+    "firebase_url": "https://bloom-b48d6-default-rtdb.firebaseio.com",
+    "project_id": "bloom-b48d6",
+    "storage_bucket": "bloom-b48d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523585465914:android:7a41e19331e79b25080f03",
+        "android_client_info": {
+          "package_name": "com.example.bloom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523585465914-uo70pdi6r03okr0evicna47nf28udju5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIfYbi1JFD3SJHeEfwhSjK2dzvvBITieo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523585465914-uo70pdi6r03okr0evicna47nf28udju5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

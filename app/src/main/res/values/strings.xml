@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Bloom</string>
+    <string name="bloom">Bloom</string>
+    <string name="choose_user_type">Choose user type:</string>
+    <string name="seller">Seller</string>
+    <string name="customer">Customer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>
