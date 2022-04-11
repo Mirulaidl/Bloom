@@ -54,6 +54,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:6.4.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     //dependency for circular ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'

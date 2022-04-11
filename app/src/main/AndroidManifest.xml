@@ -27,9 +27,6 @@
             android:name=".AddItem"
             android:exported="false" />
         <activity
-            android:name=".ListingPageSeller"
-            android:exported="false" />
-        <activity
             android:name=".ProfileActivitySeller"
             android:exported="false" />
         <activity

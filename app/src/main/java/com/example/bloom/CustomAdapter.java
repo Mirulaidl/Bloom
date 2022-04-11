@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,47 +33,52 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CustomAdapter extends FirebaseRecyclerAdapter<Item,CustomAdapter.myviewholder>
-{
-    private Context context;
-    private List<Item> items = new ArrayList<>();
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
-    public CustomAdapter(@NonNull FirebaseRecyclerOptions<Item> options, Context context, List<Item> items) {
-        super(options);
+    Context context;
+    List<Item> itemList;
+
+    public CustomAdapter(Context context, List<Item> itemList) {
         this.context = context;
-        this.items = items;
-    }
-
-    public CustomAdapter(@NonNull FirebaseRecyclerOptions<Item> options) {
-        super(options);
-    }
-
-    @Override
-    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Item model) {
-        holder.ItemName.setText(model.getItemName());
-        holder.ItemPrice.setText(model.getItemPrice());
-
+        this.itemList = itemList;
     }
 
     @NonNull
     @Override
-    public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listing_recycler_item,parent,false);
-        return new myviewholder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.listing_recycler_item,parent,false);
+
+        return new ViewHolder(v);
     }
 
-    class myviewholder extends RecyclerView.ViewHolder
-    {
-        TextView ItemName,ItemPrice, imageID;
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        Item item = itemList.get(position);
+        holder.itemname.setText(item.getItemName());
+        holder.itemprice.setText(item.getItemPrice());
 
-        public myviewholder(@NonNull View itemView) {
+        String imageUri = null;
+        imageUri = item.getImageID();
+        Picasso.get().load(imageUri).into(holder.imageView);
+    }
+
+    @Override
+    public int getItemCount() {
+        return itemList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+
+        CircleImageView imageView;
+        TextView itemname, itemprice;
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ItemName=(TextView) itemView.findViewById(R.id.itemName);
-            ItemPrice=(TextView) itemView.findViewById(R.id.itemPrice);
-            imageID=(TextView) itemView.findViewById(R.id.imageID);
 
-
+            imageView = itemView.findViewById(R.id.imageID);
+            itemname = itemView.findViewById(R.id.itemName);
+            itemprice = itemView.findViewById(R.id.itemPrice);
         }
     }
 }

@@ -108,7 +108,7 @@ public class AddItem extends AppCompatActivity {
 
                 if(task.isSuccessful()){
                     Toast.makeText(AddItem.this,"Item Added",Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(AddItem.this,ListingPageSeller.class);
+                    Intent i = new Intent(AddItem.this,ProfileActivitySeller.class);
                     startActivity(i);
 
                 }else{
