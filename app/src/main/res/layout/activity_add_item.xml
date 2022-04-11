@@ -6,78 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".AddItem">
 
-    <TextView
-        android:id="@+id/addItemBanner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:text="Add Item"
-        android:textAlignment="center"
-        android:textSize="60sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/addItemImage"
-        android:layout_width="185dp"
-        android:layout_height="147dp"
-        android:layout_below="@+id/addItemBanner"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="56dp"
-        app:civ_border_color="@color/white"
-        app:civ_border_width="1dp"
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="323dp"
+        android:layout_height="212dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addItemBanner"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/imagepholder"/>
 
     <EditText
-        android:id="@+id/addItemName"
-        android:layout_width="350dp"
+        android:id="@+id/editItemName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addItemImage"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="22dp"
         android:ems="10"
         android:hint="Item Name"
-        android:inputType="text"
-        android:textSize="24sp"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addItemImage" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
     <EditText
-        android:id="@+id/addItemPrice"
-        android:layout_width="350dp"
+        android:id="@+id/editItemPrice"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addItemName"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="33dp"
         android:ems="10"
         android:hint="Item Price"
-        android:inputType="numberDecimal"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addItemName" />
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/editItemName"
+        app:layout_constraintStart_toStartOf="@+id/editItemName"
+        app:layout_constraintTop_toBottomOf="@+id/editItemName" />
 
     <Button
-        android:id="@+id/addButton"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
-        android:layout_below="@+id/addItemPrice"
-        android:layout_marginTop="56dp"
-        android:backgroundTint="#0ED689"
-        android:text="Add Item"
-        android:textColor="#ffffff"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/btnInsert"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="292dp"
+        android:text="Insert"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addItemPrice"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editItemPrice" />
 </androidx.constraintlayout.widget.ConstraintLayout>

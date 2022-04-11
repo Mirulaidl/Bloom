@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,13 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivitySeller">
 
+    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:elevation="4dp"
+        android:id="@+id/topBar">
+
+        <TextView
+            android:id="@+id/topbartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seller Listings"
+            android:textSize="30dp" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listing_recyclerview"
         android:layout_width="403dp"
-        android:layout_height="667dp"
+        android:layout_height="617dp"
+        android:layout_below="@+id/topBar"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         tools:layout_editor_absoluteX="-191dp"

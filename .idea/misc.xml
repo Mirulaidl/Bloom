@@ -7,7 +7,8 @@
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/drawable/img.xml" value="0.1" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/drawable/selector.xml" value="0.1" />
-        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_add_item.xml" value="0.21105072463768115" />
+        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/drawable/topbar.xml" value="0.1" />
+        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_add_item.xml" value="0.1" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_cart.xml" value="0.259375" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_customer_profile.xml" value="0.2453125" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_forgot_password.xml" value="0.2" />
@@ -15,7 +16,7 @@
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_main.xml" value="0.14" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_order.xml" value="0.259375" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_profile.xml" value="0.264" />
-        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_profile_seller.xml" value="0.1" />
+        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_profile_seller.xml" value="0.264" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_register_user.xml" value="0.264" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_seller_profile.xml" value="0.259375" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/fragment_additem_seller.xml" value="0.264" />
@@ -28,11 +29,13 @@
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/listing_recycler_item.xml" value="0.4" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/nav_header_customer.xml" value="0.4" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/nav_headercustomer.xml" value="0.1" />
+        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/topbar.xml" value="0.2" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/menu/customermenu.xml" value="0.264" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/menu/listingitem.xml" value="0.1" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/menu/menucustomer.xml" value="0.2553846153846154" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/menu/menuseller.xml" value="0.1" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/menu/sellermenu.xml" value="0.264" />
+        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/mipmap-anydpi-v26/ic_imageph.xml" value="0.15208333333333332" />
       </map>
     </option>
   </component>

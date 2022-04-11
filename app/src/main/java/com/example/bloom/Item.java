@@ -2,18 +2,24 @@ package com.example.bloom;
 
 public class Item {
 
-    public String itemName, itemPrice, imageID;
+    public String itemName, itemPrice, image;
 
     public Item(){
 
     }
 
-    public String getImageID() {
-        return imageID;
+    public Item(String itemName, String itemPrice, String image) {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public void setImageID(String imageID) {
-        this.imageID = imageID;
+        this.image = image;
     }
 
     public String getItemName() {
@@ -32,11 +38,7 @@ public class Item {
         itemPrice = ItemPrice;
     }
 
-    public Item(String itemName, String itemPrice, String imageID) {
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.imageID = imageID;
-    }
+
 
 
 }

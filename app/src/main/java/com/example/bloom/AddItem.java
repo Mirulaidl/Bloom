@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +23,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -34,139 +37,121 @@ import java.util.regex.Pattern;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AddItem extends AppCompatActivity {
-
-    private Button AddItem;
-    private EditText addItemName, addItemPrice;
-    private CircleImageView addItemImage;
-    public Uri imageUri;
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
-    public static String itemNameGlobal;
+    FirebaseDatabase mDatabase;
+    DatabaseReference mRef;
+    FirebaseStorage mStorage;
+    ImageButton imageButton;
+    EditText editItemPrice, editItemName;
+    Button btnInsert;
+    private static final int Gallery_Code=1;
+    Uri imageUrl=null;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
-        addItemName = (EditText) findViewById(R.id.addItemName);
-        addItemPrice = (EditText) findViewById(R.id.addItemPrice);
-        addItemImage = (CircleImageView) findViewById(R.id.addItemImage);
+        imageButton = findViewById(R.id.imageButton);
+        editItemName = findViewById(R.id.editItemName);
+        editItemPrice = findViewById(R.id.editItemPrice);
+        btnInsert = findViewById(R.id.btnInsert);
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+        String itemName = editItemName.getText().toString();
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mDatabase = FirebaseDatabase.getInstance();
+        mRef = mDatabase.getReference().child("items").child(userID);
+        mStorage= FirebaseStorage.getInstance();
+        progressDialog = new ProgressDialog(this);
 
-        addItemImage.setOnClickListener(new View.OnClickListener() {
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choosePicture();
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent,Gallery_Code);
             }
         });
-
-        Button AddItem = findViewById(R.id.addButton);
-        AddItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addItem();
-            }
-        });
-
-    }
-    private void addItem() {
-        String ItemName = addItemName.getText().toString().trim();
-        String ItemPrice = addItemPrice.getText().toString().trim();
-
-        if (ItemName.length()>30){
-            addItemName.setError("Max item name length is 30 characters!");
-            addItemName.requestFocus();
-            return;
-        }
-        if (ItemName.isEmpty()){
-            addItemName.setError("This field must not be empty");
-            addItemName.requestFocus();
-            return;
-        }
-        String pattern = "^(\\d+(\\.\\d{0,2})?|\\.?\\d{1,2})$";
-        Pattern r = Pattern.compile(pattern);
-        Matcher m = r.matcher(ItemPrice);
-        if (!m.matches()) {
-            addItemPrice.setError("Price must be in 2 decimal places!");
-            addItemPrice.requestFocus();
-            return;
-        }
-
-        String itemName = addItemName.getText().toString();
-        itemNameGlobal = addItemName.getText().toString();
-
-        Item item = new Item(ItemName, ItemPrice, ItemName);
-        FirebaseDatabase.getInstance().getReference("items")
-                .child(getInstance().getCurrentUser().getUid()).child(itemName)
-                .setValue(item).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-
-
-                if(task.isSuccessful()){
-                    Toast.makeText(AddItem.this,"Item Added",Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(AddItem.this,ProfileActivitySeller.class);
-                    startActivity(i);
-
-                }else{
-                    Toast.makeText( AddItem.this,"There is something wrong.",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }
-
-    private void choosePicture(){
-        Intent intent = new Intent();
-        intent.setType("image/");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, 1);
-
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
-            imageUri = data.getData();
-            addItemImage.setImageURI(imageUri);
-            uploadPicture();
+
+        if (requestCode==Gallery_Code && resultCode==RESULT_OK)
+        {
+            imageUrl = data.getData();
+            imageButton.setImageURI(imageUrl);
         }
-    }
 
-    private void uploadPicture(){
+    btnInsert.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String in=editItemName.getText().toString().trim();
+            String ip=editItemPrice.getText().toString().trim();
 
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setTitle("Uploading Image...");
-        pd.show();
+            String ItemName = editItemName.getText().toString().trim();
+            String ItemPrice = editItemPrice.getText().toString().trim();
 
-        String itemName = addItemName.getText().toString();
-        final String randomKey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child("ItemImage/").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(itemName);
+            if (ItemName.length()>25){
+                editItemName.setError("Max item name length is 25 characters!");
+                editItemName.requestFocus();
+                return;
+            }
+            if (ItemName.isEmpty()){
+                editItemName.setError("This field must not be empty");
+                editItemName.requestFocus();
+                return;
+            }
+            String pattern2 = "^(-?(\\d+)?\\.\\d+)$";
+            Pattern r2 = Pattern.compile(pattern2);
+            Matcher m2 = r2.matcher(ItemPrice);
+            if (!m2.matches()) {
+                editItemPrice.setError("Price must have point/dot(.) followed by 2 decimal numbers!");
+                editItemPrice.requestFocus();
+                return;
+            }
+            String pattern = "^(\\d+(\\.\\d{0,2})?|\\.?\\d{1,2})$";
+            Pattern r = Pattern.compile(pattern);
+            Matcher m = r.matcher(ItemPrice);
+            if (!m.matches()) {
+                editItemPrice.setError("Price must be in 2 decimal places!");
+                editItemPrice.requestFocus();
+                return;
+            }
+            if (!(in.isEmpty() && ip.isEmpty() && imageUrl!=null))
+            {
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
 
-        riversRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                StorageReference filepath = mStorage.getReference().child("ItemImage/").child(imageUrl.getLastPathSegment());
+                filepath.putFile(imageUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
 
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                        double progressPercent = (100.00 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                        pd.setMessage("Percentage: "+(int)progressPercent+"%");
+                        Task<Uri> downloadUrl=taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+
+                                String t = task.getResult().toString();
+                                if(task.isSuccessful()){
+                                    DatabaseReference newPost = mRef.push();
+                                    newPost.child("itemName").setValue(in);
+                                    newPost.child("itemPrice").setValue(ip);
+                                    newPost.child("image").setValue(task.getResult().toString());
+                                    progressDialog.dismiss();
+
+                                    Intent intent = new Intent(AddItem.this, ProfileActivitySeller.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText( AddItem.this,"There is something wrong.",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
                 });
-
+            }
+        }
+    });
     }
 }

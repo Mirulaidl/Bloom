@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,7 +61,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         holder.itemprice.setText(item.getItemPrice());
 
         String imageUri = null;
-        imageUri = item.getImageID();
+        imageUri = item.getImage();
         Picasso.get().load(imageUri).into(holder.imageView);
     }
 
@@ -71,12 +72,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        CircleImageView imageView;
+        ImageView imageView;
         TextView itemname, itemprice;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.imageID);
+            imageView = itemView.findViewById(R.id.itemImageView);
             itemname = itemView.findViewById(R.id.itemName);
             itemprice = itemView.findViewById(R.id.itemPrice);
         }

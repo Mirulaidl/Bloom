@@ -54,8 +54,6 @@ public class ProfileActivitySeller extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_seller);
 
-
-        String userId = getInstance().getCurrentUser().getUid();
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("items").child(getInstance().getCurrentUser().getUid());
         mStorage = FirebaseStorage.getInstance();
@@ -120,6 +118,17 @@ public class ProfileActivitySeller extends AppCompatActivity  {
                         return true;
                 }
                 return false;
+            }
+        });
+
+        //floating action button
+
+        FloatingActionButton addButton = findViewById(R.id.addItemButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),AddItem.class));
+                overridePendingTransition(0,0);
             }
         });
 
