@@ -39,7 +39,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder,int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         Item item = data.get(position);
         holder.tv_itemPrice.setText(data.get(position).getItemPrice());
@@ -53,9 +53,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
             @Override
             public void onClick(View v) {
 
-                /*Intent intent = new Intent (context,ProfileActivity.class);
-                intent.putExtra("item name",data.get(position)
-                context.startActivity(intent);*/
+                Intent intent = new Intent (context,customer_clickitem_home.class);
+                intent.putExtra("item name",data.get(holder.getAdapterPosition()).getItemName());
+                intent.putExtra("item price",data.get(holder.getAdapterPosition()).getItemPrice());
+                intent.putExtra("item image",data.get(holder.getAdapterPosition()).getImage());
+                context.startActivity(intent);
             }
         });
     }
