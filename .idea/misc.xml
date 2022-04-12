@@ -10,15 +10,17 @@
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/drawable/topbar.xml" value="0.1" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_add_item.xml" value="0.1" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_cart.xml" value="0.259375" />
+        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_customer_clickitem_home.xml" value="0.264" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_customer_profile.xml" value="0.2453125" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_forgot_password.xml" value="0.2" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_listing_page_seller.xml" value="0.21105072463768115" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_main.xml" value="0.14" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_order.xml" value="0.259375" />
-        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_profile.xml" value="0.264" />
+        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_profile.xml" value="0.2" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_profile_seller.xml" value="0.264" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_register_user.xml" value="0.264" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/activity_seller_profile.xml" value="0.259375" />
+        <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/customer_home_product.xml" value="0.1" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/fragment_additem_seller.xml" value="0.264" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/fragment_cart_customer.xml" value="0.20606884057971014" />
         <entry key="..\:/Users/L E N O V O/AndroidStudioProjects/Bloom/app/src/main/res/layout/fragment_home_customer.xml" value="0.20153985507246377" />

@@ -66,8 +66,6 @@ public class ProfileActivitySeller extends AppCompatActivity  {
         recyclerView.setAdapter(itemAdapter);
 
 
-
-
         mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable String previousChildName) {

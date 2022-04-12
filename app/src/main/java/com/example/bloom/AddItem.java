@@ -39,6 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AddItem extends AppCompatActivity {
     FirebaseDatabase mDatabase;
     DatabaseReference mRef;
+    DatabaseReference mRef2;
     FirebaseStorage mStorage;
     ImageButton imageButton;
     EditText editItemPrice, editItemName;
@@ -61,6 +62,7 @@ public class AddItem extends AppCompatActivity {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference().child("items").child(userID);
+        mRef2 = mDatabase.getReference().child("allitems");
         mStorage= FirebaseStorage.getInstance();
         progressDialog = new ProgressDialog(this);
 
@@ -139,6 +141,11 @@ public class AddItem extends AppCompatActivity {
                                     newPost.child("itemName").setValue(in);
                                     newPost.child("itemPrice").setValue(ip);
                                     newPost.child("image").setValue(task.getResult().toString());
+
+                                    DatabaseReference newPost2 = mRef2.push();
+                                    newPost2.child("itemName").setValue(in);
+                                    newPost2.child("itemPrice").setValue(ip);
+                                    newPost2.child("image").setValue(task.getResult().toString());
                                     progressDialog.dismiss();
 
                                     Intent intent = new Intent(AddItem.this, ProfileActivitySeller.class);
