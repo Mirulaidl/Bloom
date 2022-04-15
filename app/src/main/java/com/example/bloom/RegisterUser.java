@@ -6,11 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener{
 
@@ -29,7 +33,10 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private RadioGroup radioGroup;
     private RadioButton radioSeller, radioCustomer;
     private String RadioType = "null" ;
+    private ImageButton profilepic;
     private FirebaseAuth mAuth;
+    private FirebaseStorage mStorage;
+    Uri imageUrl=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +72,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextUserName = (EditText) findViewById(R.id.username);
         editTextEmail = (EditText) findViewById(R.id.email);
         editTextPassword = (EditText) findViewById(R.id.password);
+        profilepic = (ImageButton) findViewById(R.id.profilepicture);
+        imageUrl = mStorage.getReference().getDownloadUrl()
+        profilepic.setImageURI();
     }
     @Override
     public void onClick(View v) {
@@ -84,6 +94,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String fullName= editTextFullName.getText().toString().trim();
         String username= editTextUserName.getText().toString().trim();
         String type = RadioType;
+        String pfp = data.getData();
 
         if(fullName.isEmpty()){
             editTextFullName.setError("Full name is required");
@@ -131,7 +142,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                    public void onComplete(@NonNull Task<AuthResult> task) {
 
                        if(task.isSuccessful()){
-                           User user = new User(fullName, username, email, type);
+                           User user = new User(fullName, username, email, type, pfp);
 
                            FirebaseDatabase.getInstance().getReference("users")
                                    .child(getInstance().getCurrentUser().getUid())
