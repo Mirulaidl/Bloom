@@ -38,15 +38,16 @@
         android:id="@+id/fullName"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Fullname"
         android:inputType="text"
         android:textSize="24sp"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bannerDescription"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/bannerDescription" />
+
     <EditText
         android:id="@+id/username"
         android:layout_width="350dp"
@@ -75,6 +76,18 @@
         app:layout_constraintTop_toBottomOf="@+id/username"
         />
     <EditText
+        android:id="@+id/phonenum"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:textSize="24sp"
+        android:hint="Phone Number"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp" />
+    <EditText
         android:id="@+id/password"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
@@ -82,7 +95,7 @@
         android:inputType="textPassword"
         android:textSize="24sp"
         android:hint="Password"
-        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/phonenum"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="10dp"
@@ -92,44 +105,45 @@
         android:id="@+id/registerUser"
         android:layout_width="350dp"
         android:layout_height="70dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="#0ED689"
         android:text="Register"
         android:textColor="#ffffff"
         android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginStart="148dp"
         android:text="@string/choose_user_type"
-        app:layout_constraintBottom_toTopOf="@+id/registerUser"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="238dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="257dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="48dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/registerUser"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.587">
+        app:layout_constraintVertical_bias="0.0">
 
         <RadioButton
             android:id="@+id/radioCustomer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="121dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="48dp"
             android:text="@string/customer"
             app:layout_constraintBottom_toTopOf="@+id/registerUser"
@@ -140,7 +154,7 @@
         <RadioButton
             android:id="@+id/radioSeller"
             android:layout_width="83dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="@string/seller"
             app:layout_constraintBottom_toTopOf="@+id/registerUser"
             app:layout_constraintEnd_toStartOf="@+id/radioCustomer"
@@ -150,7 +164,6 @@
             app:layout_constraintVertical_bias="0.531" />
 
     </RadioGroup>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -42,23 +45,38 @@ public class AddItem extends AppCompatActivity {
     DatabaseReference mRef2;
     FirebaseStorage mStorage;
     ImageButton imageButton;
-    EditText editItemPrice, editItemName;
+    EditText editItemPrice, editItemName, editItemDescription;
     Button btnInsert;
     private static final int Gallery_Code=1;
     Uri imageUrl=null;
     ProgressDialog progressDialog;
+
+    String[] items = {"Plants","Compost & Soils","Pots & Planters","Seeds","Gardening Tools","Pesticides","Gardening Accessories"};
+    AutoCompleteTextView autoCompleteTxt;
+    ArrayAdapter<String> adapterItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
+        autoCompleteTxt = findViewById(R.id.auto_complete_txt);
+        adapterItems = new ArrayAdapter<String>(this,R.layout.categorydropdown,items);
+        autoCompleteTxt.setAdapter(adapterItems);
+        autoCompleteTxt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String itemdropdown = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getApplicationContext(),"Item: "+itemdropdown,Toast.LENGTH_SHORT).show();
+            }
+        });
+
         imageButton = findViewById(R.id.imageButton);
         editItemName = findViewById(R.id.editItemName);
         editItemPrice = findViewById(R.id.editItemPrice);
+        editItemDescription = findViewById(R.id.editItemDescription);
         btnInsert = findViewById(R.id.btnInsert);
 
-        String itemName = editItemName.getText().toString();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference().child("items").child(userID);
@@ -89,11 +107,30 @@ public class AddItem extends AppCompatActivity {
     btnInsert.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String in=editItemName.getText().toString().trim();
-            String ip=editItemPrice.getText().toString().trim();
+            String in= editItemName.getText().toString().trim();
+            String ip= editItemPrice.getText().toString().trim();
+            String ic= editItemDescription.getText().toString().trim();
+            String dd= autoCompleteTxt.getText().toString().trim();
 
             String ItemName = editItemName.getText().toString().trim();
             String ItemPrice = editItemPrice.getText().toString().trim();
+
+            if(dd.isEmpty()){
+                autoCompleteTxt.setError("Please, choose category for your item!");
+                autoCompleteTxt.requestFocus();
+                return;
+            }
+
+            if(ic.isEmpty()){
+                editItemDescription.setError("Item must have description");
+                editItemDescription.requestFocus();
+                return;
+            }
+            if(ic.length()>100){
+                editItemDescription.setError("Max description length is 100 characters!");
+                editItemDescription.requestFocus();
+                return;
+            }
 
             if (ItemName.length()>25){
                 editItemName.setError("Max item name length is 25 characters!");
@@ -141,11 +178,15 @@ public class AddItem extends AppCompatActivity {
                                     newPost.child("itemName").setValue(in);
                                     newPost.child("itemPrice").setValue(ip);
                                     newPost.child("image").setValue(task.getResult().toString());
+                                    newPost.child("itemDescription").setValue(dd);
+                                    newPost.child("itemCategory").setValue(ic);
 
                                     DatabaseReference newPost2 = mRef2.push();
                                     newPost2.child("itemName").setValue(in);
                                     newPost2.child("itemPrice").setValue(ip);
                                     newPost2.child("image").setValue(task.getResult().toString());
+                                    newPost2.child("category").setValue(dd);
+                                    newPost2.child("itemCategory").setValue(ic);
                                     progressDialog.dismiss();
 
                                     Intent intent = new Intent(AddItem.this, ProfileActivitySeller.class);

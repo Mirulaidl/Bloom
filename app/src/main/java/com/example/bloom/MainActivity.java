@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(task.isSuccessful()){
                     FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 
-                    if(user.isEmailVerified()){
+                    //if(user.isEmailVerified()){
                         // redirect to user profile
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
                         String userID = user.getUid();
@@ -131,10 +131,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             }
                         });
-                    }else {
-                        user.sendEmailVerification();
-                        Toast.makeText(MainActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
-                    }
+                    //}else {
+                    //    user.sendEmailVerification();
+                    //    Toast.makeText(MainActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
+                    //}
 
 
                 }else{
