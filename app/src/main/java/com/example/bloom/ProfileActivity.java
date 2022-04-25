@@ -64,6 +64,8 @@ public class ProfileActivity extends AppCompatActivity{
         itemAdapter = new HomeAdapter(ProfileActivity.this,itemList);
         recyclerView.setAdapter(itemAdapter);
 
+
+
         mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable String previousChildName) {
@@ -82,6 +84,7 @@ public class ProfileActivity extends AppCompatActivity{
 
             }
 
+
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
@@ -92,6 +95,7 @@ public class ProfileActivity extends AppCompatActivity{
 
             }
         });
+
         //bottom navigation
         bottomNavigationView = findViewById(R.id.bottom_navigator);
         bottomNavigationView.setSelectedItemId(R.id.home);

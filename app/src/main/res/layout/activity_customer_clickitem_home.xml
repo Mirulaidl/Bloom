@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,7 +20,8 @@
                 android:layout_width="125dp"
                 android:layout_height="170dp"
                 android:id="@+id/imageviewclick"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_imageph"/>
             <TextView
                 android:id="@+id/itemname"
                 android:layout_width="wrap_content"
@@ -29,24 +29,27 @@
                 android:text="Item Name"
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
             <TextView
+                android:id="@+id/itemcategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Category"
                 android:background="#edecec"
                 android:layout_marginTop="10dp"/>
+
             <TextView
-                android:textSize="18sp"
-                android:layout_marginTop="10dp"
+                android:id="@+id/itemdescription"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Description"/>
+                android:layout_height="102dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#ffffff"
+                android:text="Description" />
             <TextView
                 android:id="@+id/itemprice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="99.99"/>
+                android:text="99.99" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

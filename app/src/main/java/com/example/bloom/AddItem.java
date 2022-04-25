@@ -109,8 +109,8 @@ public class AddItem extends AppCompatActivity {
         public void onClick(View v) {
             String in= editItemName.getText().toString().trim();
             String ip= editItemPrice.getText().toString().trim();
-            String ic= editItemDescription.getText().toString().trim();
-            String dd= autoCompleteTxt.getText().toString().trim();
+            String dd= editItemDescription.getText().toString().trim();
+            String ic= autoCompleteTxt.getText().toString().trim();
 
             String ItemName = editItemName.getText().toString().trim();
             String ItemPrice = editItemPrice.getText().toString().trim();
@@ -185,7 +185,7 @@ public class AddItem extends AppCompatActivity {
                                     newPost2.child("itemName").setValue(in);
                                     newPost2.child("itemPrice").setValue(ip);
                                     newPost2.child("image").setValue(task.getResult().toString());
-                                    newPost2.child("category").setValue(dd);
+                                    newPost2.child("itemDescription").setValue(dd);
                                     newPost2.child("itemCategory").setValue(ic);
                                     progressDialog.dismiss();
 

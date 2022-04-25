@@ -16,6 +16,7 @@ public class Item {
         this.itemCategory = itemCategory;
     }
 
+
     public String getItemCategory() {
         return itemCategory;
     }
