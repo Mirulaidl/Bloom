@@ -8,12 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,9 +22,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart extends AppCompatActivity {
+public class checkOut extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
+    FloatingActionButton coButton;
 
     FirebaseDatabase mDatabase;
     DatabaseReference mRef;
@@ -36,12 +33,10 @@ public class Cart extends AppCompatActivity {
     CartAdapter itemAdapter;
     List<Item> itemList;
 
-    FloatingActionButton poButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+        setContentView(R.layout.activity_check_out);
 
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("cart").child(getInstance().getCurrentUser().getUid());
@@ -51,7 +46,7 @@ public class Cart extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         itemList = new ArrayList<Item>();
-        itemAdapter = new CartAdapter(Cart.this,itemList);
+        itemAdapter = new CartAdapter(checkOut.this,itemList);
         recyclerView.setAdapter(itemAdapter);
 
         mRef.addChildEventListener(new ChildEventListener(){
@@ -83,37 +78,13 @@ public class Cart extends AppCompatActivity {
             }
         });
 
-        poButton = (FloatingActionButton) findViewById(R.id.fabpo);
-        poButton.setOnClickListener(new View.OnClickListener() {
+        coButton = (FloatingActionButton) findViewById(R.id.fabco);
+        coButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
 
-
-        bottomNavigationView = findViewById(R.id.bottom_navigator);
-        bottomNavigationView.setSelectedItemId(R.id.cart);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId())
-                {
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.customerProfile:
-                        startActivity(new Intent(getApplicationContext(),CustomerProfile.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.cart:
-                        return true;
-                }
-                return false;
-            }
-        });
     }
 }

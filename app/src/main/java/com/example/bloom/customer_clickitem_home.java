@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,23 +32,23 @@ import java.util.List;
 
 public class customer_clickitem_home extends AppCompatActivity {
 
+    FirebaseDatabase mDatabase;
+    DatabaseReference mRef;
+
     ImageView img;
     TextView tvitemname,tvitemprice,tvitemdesc,tvitemcat;
     String name,price,desc,cat;
+    Button addToCartButton;
 
-    DatabaseReference reference;
-    FirebaseAuth mAuth;
-    FirebaseDatabase mDatabase;
-    FirebaseUser user;
-    Item item;
+    int quantity;
+    NumberPicker numberPicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_clickitem_home);
 
-        tv_itemname = (TextView) findViewById(R.id.itemname);
-        tv_itemprice = (TextView) findViewById(R.id.itemprice);
+
         img = (ImageView) findViewById(R.id.imageviewclick);
 
         Intent intent = getIntent();

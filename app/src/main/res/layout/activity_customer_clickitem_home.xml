@@ -39,19 +39,42 @@
                 android:layout_marginTop="10dp"/>
 
             <TextView
-                android:id="@+id/itemdescription"
-                android:layout_width="match_parent"
-                android:layout_height="102dp"
-                android:layout_marginTop="10dp"
-                android:textColor="#ffffff"
-                android:text="Description" />
-            <TextView
                 android:id="@+id/itemprice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="99.99" />
 
+            <TextView
+                android:id="@+id/itemdescription"
+                android:layout_width="match_parent"
+                android:layout_height="212dp"
+                android:layout_marginTop="10dp"
+                android:text="Description"
+                android:textColor="#ffffff" />
+
+
+            <NumberPicker
+                android:id="@+id/qtPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="109dp"
+                android:layout_marginLeft="150dp" />
+
+            <Button
+                android:id="@+id/buynowbutton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/design_default_color_on_primary"
+                android:text="Buy Now"/>
+            <Button
+                android:id="@+id/addtocartbutton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/design_default_color_on_primary"
+                android:text="Add to Cart"/>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+
 
 </LinearLayout>
