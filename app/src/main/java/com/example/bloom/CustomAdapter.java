@@ -76,7 +76,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         ImageView imageView;
         TextView itemname, itemprice;
-        int totalprice;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

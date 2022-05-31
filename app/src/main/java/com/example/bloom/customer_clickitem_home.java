@@ -1,12 +1,14 @@
 package com.example.bloom;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -31,6 +33,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class customer_clickitem_home extends AppCompatActivity {
+
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private EditText add1, add2, addnum;
+    private Button orderbutton, cancelbutton;
 
     FirebaseDatabase mDatabase;
     DatabaseReference mRef;
@@ -59,5 +66,74 @@ public class customer_clickitem_home extends AppCompatActivity {
         tv_itemname.setText(itemname);
         tv_itemprice.setText(itemprice);
         img.setImageResource(image);
+    }
+    public void createDeliveryInformation(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View popupView = getLayoutInflater().inflate(R.layout.popup, null);
+        add1 = (EditText) popupView.findViewById(R.id.address1);
+        add2 = (EditText) popupView.findViewById(R.id.address2);
+        addnum = (EditText) popupView.findViewById(R.id.additionalnum);
+
+        orderbutton = (Button) popupView.findViewById(R.id.btnConfirm);
+        cancelbutton = (Button) popupView.findViewById(R.id.btnCancel);
+
+        dialogBuilder.setView(popupView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        orderbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent getImage = getIntent();
+                String gettingImageUrl = getImage.getStringExtra("image");
+                Picasso.get().load(gettingImageUrl).into(img);
+
+                String tvin = tvitemname.getText().toString().trim();
+                String tvip = tvitemprice.getText().toString().trim();
+                String tvid = tvitemdesc.getText().toString().trim();
+                String tvic = tvitemcat.getText().toString().trim();
+                String ivimg = gettingImageUrl.trim();
+                String qt = Integer.toString(quantity);
+                String tvadd1 = add1.getText().toString().trim();
+                String tvadd2 = add2.getText().toString().trim();
+                String tvaddnum = addnum.getText().toString().trim();
+
+                mRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DatabaseReference newPost = mRef.push();
+                            newPost.child("itemName").setValue(tvin);
+                            newPost.child("itemPrice").setValue(tvip);
+                            newPost.child("itemDesc").setValue(tvid);
+                            newPost.child("itemCat").setValue(tvic);
+                            newPost.child("image").setValue(ivimg);
+                            newPost.child("quantity").setValue(qt);
+                            newPost.child("address1").setValue(tvadd1);
+                            newPost.child("address2").setValue(tvadd2);
+                            newPost.child("additionalnum").setValue(tvaddnum);
+
+
+                            Intent intent = new Intent(customer_clickitem_home.this, ProfileActivity.class);
+                            startActivity(intent);
+                            Toast.makeText( customer_clickitem_home.this,"Item added to your cart!",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText( customer_clickitem_home.this,"There is something wrong.",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
+        cancelbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+
     }
 }

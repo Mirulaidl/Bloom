@@ -104,8 +104,8 @@ public class CustomerProfile extends AppCompatActivity {
                         return true;
                     case R.id.customerProfile:
                         return true;
-                    case R.id.cart:
-                        startActivity(new Intent(getApplicationContext(),Cart.class));
+                    case R.id.order:
+                        startActivity(new Intent(getApplicationContext(),ordercust.class));
                         overridePendingTransition(0,0);
                         return true;
                 }

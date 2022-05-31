@@ -60,17 +60,11 @@
                 android:layout_marginLeft="150dp" />
 
             <Button
-                android:id="@+id/buynowbutton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/design_default_color_on_primary"
-                android:text="Buy Now"/>
-            <Button
                 android:id="@+id/addtocartbutton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@color/design_default_color_on_primary"
-                android:text="Add to Cart"/>
+                android:text="Buy now"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

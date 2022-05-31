@@ -56,6 +56,7 @@ public class ProfileActivity extends AppCompatActivity{
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("allitems");
         mStorage = FirebaseStorage.getInstance();
+
         recyclerView = findViewById(R.id.home_recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
@@ -112,8 +113,8 @@ public class ProfileActivity extends AppCompatActivity{
                         startActivity(new Intent(getApplicationContext(),CustomerProfile.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.cart:
-                        startActivity(new Intent(getApplicationContext(),Cart.class));
+                    case R.id.order:
+                        startActivity(new Intent(getApplicationContext(),ordercust.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
