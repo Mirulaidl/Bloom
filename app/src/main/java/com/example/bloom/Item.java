@@ -2,20 +2,24 @@ package com.example.bloom;
 
 public class Item {
 
-    public String itemName, itemPrice, image, itemDescription, itemCategory;
+    public String itemName, itemPrice, image, itemDescription, itemCategory, quantity;
 
     public Item(){
 
     }
 
-    public Item(String itemName, String itemPrice, String image, String itemDescription, String itemCategory) {
+    public Item(String itemName, String itemPrice, String image, String itemDescription, String itemCategory, String quantity) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.image = image;
         this.itemDescription = itemDescription;
         this.itemCategory = itemCategory;
+        this.quantity = quantity;
     }
 
+    public String getQuantity() { return quantity;}
+
+    public void setQuantity(String quantity) {this.quantity = quantity;}
 
     public String getItemCategory() {
         return itemCategory;

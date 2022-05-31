@@ -4,16 +4,25 @@ import static com.google.firebase.auth.FirebaseAuth.getInstance;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +45,12 @@ public class Cart extends AppCompatActivity {
     CartAdapter itemAdapter;
     List<Item> itemList;
 
-    FloatingActionButton poButton;
+    ExtendedFloatingActionButton poButton;
+
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private EditText add1, add2, addnum;
+    private Button confirm, cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +97,11 @@ public class Cart extends AppCompatActivity {
             }
         });
 
-        poButton = (FloatingActionButton) findViewById(R.id.fabpo);
+        poButton = (ExtendedFloatingActionButton) findViewById(R.id.fabpo);
         poButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createDeliveryDetail();
 
             }
         });
@@ -113,6 +128,35 @@ public class Cart extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+    }
+    public void createDeliveryDetail(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View popupView = getLayoutInflater().inflate(R.layout.activity_delivery_detail,null);
+
+        add1 = (EditText) popupView.findViewById(R.id.address1);
+        add2 = (EditText) popupView.findViewById(R.id.address2);
+        addnum = (EditText) popupView.findViewById(R.id.additionalnum);
+
+        confirm = (Button) popupView.findViewById(R.id.btnConfirm);
+        cancel = (Button) popupView.findViewById(R.id.btnCancel);
+
+        dialogBuilder.setView(popupView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }

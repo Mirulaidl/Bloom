@@ -7,11 +7,11 @@
     tools:context=".Cart">
 
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/purple_500"
-        android:elevation="4dp"
-        android:id="@+id/topBar">
+        android:elevation="4dp">
 
         <TextView
             android:id="@+id/topbartitle"

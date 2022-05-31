@@ -40,6 +40,20 @@
     </TextView>
 
     <TextView
+        android:id="@+id/quantity"
+        android:layout_width="69dp"
+        android:layout_height="21dp"
+        android:text="10 X"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/RM"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toEndOf="@+id/itemName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.372" />
+
+    <TextView
         android:id="@+id/RM"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
