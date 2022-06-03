@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity{
     BottomNavigationView bottomNavigationView;
 
     FirebaseDatabase mDatabase;
-    DatabaseReference mRef;
+    DatabaseReference mRef,mRef2;
     FirebaseStorage mStorage;
     RecyclerView recyclerView;
     HomeAdapter itemAdapter;
@@ -53,8 +53,13 @@ public class ProfileActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         //recyclerview
+
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("sellerID");
+
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("allitems");
+
         mStorage = FirebaseStorage.getInstance();
 
         recyclerView = findViewById(R.id.home_recyclerview);
@@ -64,8 +69,6 @@ public class ProfileActivity extends AppCompatActivity{
         itemList = new ArrayList<Item>();
         itemAdapter = new HomeAdapter(ProfileActivity.this,itemList);
         recyclerView.setAdapter(itemAdapter);
-
-
         mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable String previousChildName) {
@@ -121,7 +124,9 @@ public class ProfileActivity extends AppCompatActivity{
             }
         });
 
+
     }
+
 
 
 }

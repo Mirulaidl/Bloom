@@ -187,6 +187,8 @@ public class AddItem extends AppCompatActivity {
                                     newPost.child("image").setValue(task.getResult().toString());
                                     newPost.child("itemDescription").setValue(dd);
                                     newPost.child("itemCategory").setValue(ic);
+                                    String addID = newPost.getKey();
+                                    newPost.child("addID").setValue(addID);
 
                                     DatabaseReference newPost2 = mRef2.push();
                                     newPost2.child("sellerID").setValue(userID);
@@ -195,6 +197,8 @@ public class AddItem extends AppCompatActivity {
                                     newPost2.child("image").setValue(task.getResult().toString());
                                     newPost2.child("itemDescription").setValue(dd);
                                     newPost2.child("itemCategory").setValue(ic);
+                                    String addID2 = newPost2.getKey();
+                                    newPost2.child("addID").setValue(addID2);
                                     progressDialog.dismiss();
 
                                     Intent intent = new Intent(AddItem.this, ProfileActivitySeller.class);

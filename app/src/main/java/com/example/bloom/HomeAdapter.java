@@ -45,6 +45,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         holder.tv_itemName.setText(data.get(position).getItemName());
         holder.tv_itemCategory.setText(data.get(position).getItemCategory());
         holder.tv_itemDesc.setText(data.get(position).getItemDescription());
+        Intent intent2 = new Intent(context, ProfileActivity.class);
+        intent2.putExtra("sellerID",item.getSellerID());
 
         String imageUri = null;
         imageUri = item.getImage();
@@ -60,6 +62,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 intent.putExtra("itemcat",item.getItemCategory());
                 intent.putExtra("image" , item.getImage());
                 intent.putExtra("sellerID", item.getSellerID());
+
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

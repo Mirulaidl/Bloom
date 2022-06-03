@@ -2,7 +2,7 @@ package com.example.bloom;
 
 public class User {
 
-    public String fullname, username, email, type, phone;
+    public String fullname, username, email, phone;
 
     public User(){
 
@@ -12,11 +12,7 @@ public class User {
         this.fullname = fullName;
         this.username = username;
         this.email = email;
-        this.type = type;
         this.phone = phone;
     }
 
-    public String getType() {
-        return type;
-    }
 }

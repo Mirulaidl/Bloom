@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".ProfileActivity"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    android:background="@color/yellow">
 
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

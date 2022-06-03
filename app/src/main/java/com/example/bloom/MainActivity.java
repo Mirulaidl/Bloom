@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         forgotPassword = (TextView) findViewById(R.id.forgotPassword);
         forgotPassword.setOnClickListener(this);
 
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
     }
 
     @Override
@@ -115,13 +114,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                String userTypeDB = snapshot.child("type").getValue().toString();
+                                String userTypeDB = snapshot.child("email").getValue().toString();
 
-                                if (userTypeDB.equals("Customer")){
-                                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                                if (userTypeDB.equals("amirulaidilazan@gmail.com")){
+                                    startActivity(new Intent(MainActivity.this, ProfileActivitySeller.class));
                                 }
                                 else{
-                                    startActivity(new Intent(MainActivity.this, ProfileActivitySeller.class));
+                                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
 
                                 }
                             }

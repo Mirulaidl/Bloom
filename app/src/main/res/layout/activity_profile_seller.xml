@@ -5,12 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivitySeller">
+    tools:context=".ProfileActivitySeller"
+    android:background="@color/yellow">
 
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_500"
+        android:background="@color/green"
         android:elevation="4dp"
         android:id="@+id/topBar">
 
@@ -19,7 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Seller Listings"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textColor="@color/white"/>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -41,6 +43,7 @@
         android:id="@+id/addItemButton"
         android:layout_width="58dp"
         android:layout_height="58dp"
+        android:backgroundTint="@color/green"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="end|bottom"
@@ -54,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/purple_500"
+        app:itemBackground="@color/green"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menuseller" />

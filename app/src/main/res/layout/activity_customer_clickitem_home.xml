@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer_clickitem_home">
+    tools:context=".customer_clickitem_home"
+    android:background="@color/yellow">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -21,36 +22,57 @@
                 android:layout_height="170dp"
                 android:id="@+id/imageviewclick"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_imageph"/>
+                android:src="@mipmap/ic_imageph" />
             <TextView
                 android:id="@+id/itemname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Item Name"
                 android:layout_marginTop="10dp"
-                android:textSize="18sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/itemcategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Category"
-                android:background="#edecec"
-                android:layout_marginTop="10dp"/>
-
-            <TextView
-                android:id="@+id/itemprice"
+                android:textColor="@color/green"
+                android:textSize="20sp" />
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="99.99" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="RM"
+                    android:textSize="30sp"
+                    android:layout_width="50dp"
+                    android:layout_height="58dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/itemprice"
+                    android:textStyle="bold"
+                    android:layout_width="100dp"
+                    android:layout_height="58dp"
+                    android:textSize="30sp"
+                    android:text="99.99" />
+
+            </LinearLayout>
+
+
 
             <TextView
+
                 android:id="@+id/itemdescription"
                 android:layout_width="match_parent"
-                android:layout_height="212dp"
+                android:layout_height="174dp"
                 android:layout_marginTop="10dp"
-                android:text="Description"
-                android:textColor="#ffffff" />
+                android:textSize="20sp"
+                android:text="- Description"
+                android:textColor="#000000" />
 
 
             <NumberPicker
@@ -61,9 +83,9 @@
 
             <Button
                 android:id="@+id/addtocartbutton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/design_default_color_on_primary"
+                android:layout_width="300dp"
+                android:layout_height="65dp"
+                android:backgroundTint="@color/green"
                 android:text="Buy now"/>
 
         </LinearLayout>

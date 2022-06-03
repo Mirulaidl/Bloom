@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomerProfile">
+    tools:context=".CustomerProfile"
+    android:background="@color/yellow">
 
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -133,6 +134,7 @@
         android:layout_marginTop="75dp"
         android:layout_marginEnd="30dp"
         android:text="Edit Profile"
+        android:backgroundTint="@color/green"
         android:textAlignment="center"/>
 
     <Button
@@ -148,6 +150,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="92dp"
         android:text="Log out"
+        android:backgroundTint="@color/green"
         android:textAlignment="center" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

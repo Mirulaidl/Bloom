@@ -2,7 +2,7 @@ package com.example.bloom;
 
 public class Item {
 
-    public String itemName, itemPrice, image, itemDescription, itemCategory, quantity, address1, address2, additionalnumber, sellerID, buyerID, orderID;
+    public String itemName, itemPrice, image, itemDescription, itemCategory, quantity, address1, address2, additionalnumber, sellerID, buyerID, orderID, addID;
 
     public Item(){
 
@@ -21,6 +21,7 @@ public class Item {
         this.sellerID = sellerID;
         this.buyerID = buyerID;
         this.orderID = orderID;
+        this.addID = addID;
 
     }
 
@@ -114,5 +115,13 @@ public class Item {
 
     public void setOrderID(String orderID) {
         this.orderID = orderID;
+    }
+
+    public String getAddID() {
+        return addID;
+    }
+
+    public void setAddID(String addID) {
+        this.addID = addID;
     }
 }

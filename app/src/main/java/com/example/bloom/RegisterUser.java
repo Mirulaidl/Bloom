@@ -44,22 +44,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         registerUser = (Button) findViewById(R.id.registerUser);
         registerUser.setOnClickListener(this);
 
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        radioSeller = findViewById(R.id.radioSeller);
-        radioCustomer = findViewById(R.id.radioCustomer);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.radioSeller:
-                        RadioType = "Seller";
-                        break;
-                    case R.id.radioCustomer:
-                        RadioType = "Customer";
-                        break;
-                }
-            }
-        });
 
         editTextFullName = (EditText) findViewById(R.id.fullName);
         editTextUserName = (EditText) findViewById(R.id.username);

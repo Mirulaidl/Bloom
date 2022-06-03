@@ -53,6 +53,7 @@ android:background="@color/white">
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="26sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/itemPrice"
         app:layout_constraintHorizontal_bias="0.893"
@@ -72,6 +73,7 @@ android:background="@color/white">
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="26sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.956"
@@ -147,10 +149,10 @@ android:background="@color/white">
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.664" />
+        app:layout_constraintVertical_bias="0.662" />
 
     <TextView
         android:id="@+id/ad2"
@@ -161,7 +163,7 @@ android:background="@color/white">
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.264"
+        app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.854" />
@@ -171,7 +173,7 @@ android:background="@color/white">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="01139350813"
-        android:textColor="@color/black"
+        android:textColor="@color/green"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -182,16 +184,18 @@ android:background="@color/white">
 
     <Button
         android:id="@+id/delete"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="81dp"
+        android:layout_height="43dp"
+        android:backgroundTint="@color/green"
         android:src="@drawable/ic_check"
+        android:text="done"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintHorizontal_bias="0.987"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.894" />
+        app:layout_constraintVertical_bias="0.97" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

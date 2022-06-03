@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/yellow">
 
     <TextView
         android:layout_width="409dp"
@@ -13,6 +14,8 @@
         android:text="Delivery Detail"
         android:textAlignment="center"
         android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/address1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -22,8 +25,8 @@
 
     <EditText
         android:id="@+id/address1"
-        android:layout_width="match_parent"
-        android:layout_height="41dp"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="20dp"
         android:hint="Address Line 1"
         app:layout_constraintBottom_toTopOf="@+id/address2"
@@ -32,7 +35,7 @@
 
     <EditText
         android:id="@+id/address2"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="45dp"
         android:layout_marginBottom="20dp"
         android:hint="Address Line 2"
@@ -42,8 +45,8 @@
 
     <EditText
         android:id="@+id/additionalnum"
-        android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="52dp"
         android:hint="Additional Phone Number"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirm"
@@ -52,22 +55,28 @@
 
     <Button
         android:id="@+id/btnConfirm"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="8dp"
         android:text="Confirm"
         app:layout_constraintBottom_toTopOf="@+id/btnCancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"
+
+        />
 
     <Button
         android:id="@+id/btnCancel"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Cancel"/>
+        android:text="Cancel"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

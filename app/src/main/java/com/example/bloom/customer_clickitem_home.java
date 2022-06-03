@@ -162,7 +162,8 @@ public class customer_clickitem_home extends AppCompatActivity {
                             newPost2.child("additionalnumber").setValue(tvaddnum);
                             newPost2.child("sellerID").setValue(sid);
                             newPost2.child("buyerID").setValue(bid);
-                            newPost2.child("orderID").setValue(orderID);
+                            String orderID2 = newPost2.getKey();
+                            newPost2.child("orderID").setValue(orderID2);
 
 
                             Intent intent = new Intent(customer_clickitem_home.this, ProfileActivity.class);

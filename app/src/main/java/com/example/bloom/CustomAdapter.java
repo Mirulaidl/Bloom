@@ -2,11 +2,13 @@ package com.example.bloom;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
@@ -59,10 +62,27 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         Item item = itemList.get(position);
         holder.itemname.setText(item.getItemName());
         holder.itemprice.setText(item.getItemPrice());
+        String id = item.getAddID();
 
         String imageUri = null;
         imageUri = item.getImage();
         Picasso.get().load(imageUri).into(holder.imageView);
+
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String userID = user.getUid();
+
+                DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("allitems").child(id);
+                orderRef.removeValue();
+                DatabaseReference orderRef2 = FirebaseDatabase.getInstance().getReference().child("items").child(userID).child(id);
+                orderRef2.removeValue();
+
+                Intent intent = new Intent(context,ProfileActivitySeller.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -75,12 +95,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         ImageView imageView;
         TextView itemname, itemprice;
+        Button btnDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.itemImageView);
             itemname = itemView.findViewById(R.id.itemName);
             itemprice = itemView.findViewById(R.id.itemPrice);
+            btnDelete = itemView.findViewById(R.id.btndelete);
         }
     }
 }
