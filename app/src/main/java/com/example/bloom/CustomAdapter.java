@@ -64,7 +64,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         imageUri = item.getImage();
         Picasso.get().load(imageUri).into(holder.imageView);
 
-        int oneItemPrice = ((Integer.valueOf(item.getItemPrice())));
     }
 
     @Override

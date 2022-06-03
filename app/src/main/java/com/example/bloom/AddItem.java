@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -108,6 +109,8 @@ public class AddItem extends AppCompatActivity {
     btnInsert.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
             String in= editItemName.getText().toString().trim();
             String ip= editItemPrice.getText().toString().trim();
             String dd= editItemDescription.getText().toString().trim();
@@ -115,6 +118,8 @@ public class AddItem extends AppCompatActivity {
 
             String ItemName = editItemName.getText().toString().trim();
             String ItemPrice = editItemPrice.getText().toString().trim();
+
+
 
             if(dd.isEmpty()){
                 autoCompleteTxt.setError("Please, choose category for your item!");
@@ -176,6 +181,7 @@ public class AddItem extends AppCompatActivity {
                                 String t = task.getResult().toString();
                                 if(task.isSuccessful()){
                                     DatabaseReference newPost = mRef.push();
+                                    newPost.child("sellerID").setValue(userID);
                                     newPost.child("itemName").setValue(in);
                                     newPost.child("itemPrice").setValue(ip);
                                     newPost.child("image").setValue(task.getResult().toString());
@@ -183,6 +189,7 @@ public class AddItem extends AppCompatActivity {
                                     newPost.child("itemCategory").setValue(ic);
 
                                     DatabaseReference newPost2 = mRef2.push();
+                                    newPost2.child("sellerID").setValue(userID);
                                     newPost2.child("itemName").setValue(in);
                                     newPost2.child("itemPrice").setValue(ip);
                                     newPost2.child("image").setValue(task.getResult().toString());

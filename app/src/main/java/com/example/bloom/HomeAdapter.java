@@ -59,6 +59,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 intent.putExtra("itemdesc",item.getItemDescription());
                 intent.putExtra("itemcat",item.getItemCategory());
                 intent.putExtra("image" , item.getImage());
+                intent.putExtra("sellerID", item.getSellerID());
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

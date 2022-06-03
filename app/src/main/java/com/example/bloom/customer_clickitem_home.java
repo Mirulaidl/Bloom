@@ -31,6 +31,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class customer_clickitem_home extends AppCompatActivity {
 
@@ -40,11 +42,11 @@ public class customer_clickitem_home extends AppCompatActivity {
     private Button orderbutton, cancelbutton;
 
     FirebaseDatabase mDatabase;
-    DatabaseReference mRef;
+    DatabaseReference mRef,mRef2;
 
     ImageView img;
     TextView tvitemname,tvitemprice,tvitemdesc,tvitemcat;
-    String name,price,desc,cat;
+    String name,price,desc,cat, sID;
     Button addToCartButton;
 
     int quantity;
@@ -74,6 +76,7 @@ public class customer_clickitem_home extends AppCompatActivity {
         add2 = (EditText) popupView.findViewById(R.id.address2);
         addnum = (EditText) popupView.findViewById(R.id.additionalnum);
 
+
         orderbutton = (Button) popupView.findViewById(R.id.btnConfirm);
         cancelbutton = (Button) popupView.findViewById(R.id.btnCancel);
 
@@ -89,6 +92,9 @@ public class customer_clickitem_home extends AppCompatActivity {
                 String gettingImageUrl = getImage.getStringExtra("image");
                 Picasso.get().load(gettingImageUrl).into(img);
 
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String userID = user.getUid();
+
                 String tvin = tvitemname.getText().toString().trim();
                 String tvip = tvitemprice.getText().toString().trim();
                 String tvid = tvitemdesc.getText().toString().trim();
@@ -98,26 +104,70 @@ public class customer_clickitem_home extends AppCompatActivity {
                 String tvadd1 = add1.getText().toString().trim();
                 String tvadd2 = add2.getText().toString().trim();
                 String tvaddnum = addnum.getText().toString().trim();
+                String sid = sID.trim();
+                String bid = userID.trim();
+
+
+                if(tvadd1.isEmpty()){
+                    add1.setError("This field is required!");
+                    add1.requestFocus();
+                    return;
+                }
+                if(tvadd2.isEmpty()){
+                    add2.setError("Email is required!");
+                    add2.requestFocus();
+                    return;
+                }
+                if(tvaddnum.isEmpty()){
+                    addnum.setError("Email is required!");
+                    addnum.requestFocus();
+                    return;
+                }
+
+                mDatabase = FirebaseDatabase.getInstance();
+                String usered = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                mRef = mDatabase.getReference("orderseller");
+                mRef2 = mDatabase.getReference("ordercustomer").child(usered);
 
                 mRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.isSuccessful()){
+                            //Item item = new Item(tvin,tvip,tvid,tvic,ivimg,qt,tvadd1,tvadd2,tvaddnum,sid,bid);
+
                             DatabaseReference newPost = mRef.push();
                             newPost.child("itemName").setValue(tvin);
                             newPost.child("itemPrice").setValue(tvip);
                             newPost.child("itemDesc").setValue(tvid);
-                            newPost.child("itemCat").setValue(tvic);
+                            newPost.child("itemCategory").setValue(tvic);
                             newPost.child("image").setValue(ivimg);
                             newPost.child("quantity").setValue(qt);
                             newPost.child("address1").setValue(tvadd1);
                             newPost.child("address2").setValue(tvadd2);
-                            newPost.child("additionalnum").setValue(tvaddnum);
+                            newPost.child("additionalnumber").setValue(tvaddnum);
+                            newPost.child("sellerID").setValue(sid);
+                            newPost.child("buyerID").setValue(bid);
+                            String orderID = newPost.getKey();
+                            newPost.child("orderID").setValue(orderID);
+
+                            DatabaseReference newPost2 = mRef2.push();
+                            newPost2.child("itemName").setValue(tvin);
+                            newPost2.child("itemPrice").setValue(tvip);
+                            newPost2.child("itemDesc").setValue(tvid);
+                            newPost2.child("itemCategory").setValue(tvic);
+                            newPost2.child("image").setValue(ivimg);
+                            newPost2.child("quantity").setValue(qt);
+                            newPost2.child("address1").setValue(tvadd1);
+                            newPost2.child("address2").setValue(tvadd2);
+                            newPost2.child("additionalnumber").setValue(tvaddnum);
+                            newPost2.child("sellerID").setValue(sid);
+                            newPost2.child("buyerID").setValue(bid);
+                            newPost2.child("orderID").setValue(orderID);
 
 
                             Intent intent = new Intent(customer_clickitem_home.this, ProfileActivity.class);
                             startActivity(intent);
-                            Toast.makeText( customer_clickitem_home.this,"Item added to your cart!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText( customer_clickitem_home.this,"Item successfully ordered!",Toast.LENGTH_SHORT).show();
                         }
                         else{
                             Toast.makeText( customer_clickitem_home.this,"There is something wrong.",Toast.LENGTH_SHORT).show();

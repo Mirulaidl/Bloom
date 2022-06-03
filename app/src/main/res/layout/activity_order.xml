@@ -21,6 +21,14 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_order"
+        android:layout_width="match_parent"
+        android:layout_height="622dp"
+        android:layout_above="@+id/bottom_navigator"
+        android:layout_marginTop="-56dp"
+        android:layout_marginBottom="1dp" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigator"
         android:layout_width="match_parent"

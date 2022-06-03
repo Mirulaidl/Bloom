@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,8 +43,10 @@ public class ordercust extends AppCompatActivity {
         setContentView(R.layout.activity_ordercust);
 
         mDatabase = FirebaseDatabase.getInstance();
-        mRef = mDatabase.getReference("custorder").child(getInstance().getCurrentUser().getUid());
+        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mRef = mDatabase.getReference().child("ordercustomer").child(user);
         mStorage = FirebaseStorage.getInstance();
+
 
         recyclerView = findViewById(R.id.order_recyclerview);
         recyclerView.setHasFixedSize(true);
