@@ -25,33 +25,39 @@
 
     <EditText
         android:id="@+id/address1"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginBottom="20dp"
         android:hint="Address Line 1"
         app:layout_constraintBottom_toTopOf="@+id/address2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/AppTheme.Picker"
+        android:textColor="@color/black"/>
 
     <EditText
         android:id="@+id/address2"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginBottom="20dp"
         android:hint="Address Line 2"
         app:layout_constraintBottom_toTopOf="@+id/additionalnum"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/AppTheme.Picker"
+        android:textColor="@color/black"/>
 
     <EditText
         android:id="@+id/additionalnum"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginBottom="52dp"
         android:hint="Additional Phone Number"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/AppTheme.Picker"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btnConfirm"

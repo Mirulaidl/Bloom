@@ -214,4 +214,9 @@ public class AddItem extends AppCompatActivity {
         }
     });
     }
+
+    @Override
+    public void onBackPressed() {
+        setContentView(R.layout.activity_profile_seller);
+    }
 }

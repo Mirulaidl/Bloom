@@ -26,9 +26,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
     private TextView banner, registerUser;
     private EditText editTextFullName, editTextUserName, editTextEmail, editTextPassword, editTextPhone;
-    private RadioGroup radioGroup;
-    private RadioButton radioSeller, radioCustomer;
-    private String RadioType = "null" ;
+
     private FirebaseAuth mAuth;
 
     @Override
@@ -69,7 +67,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String fullName= editTextFullName.getText().toString().trim();
         String username= editTextUserName.getText().toString().trim();
         String phone= editTextPhone.getText().toString().trim();
-        String type = RadioType;
 
         if(fullName.isEmpty()){
             editTextFullName.setError("Full name is required");
@@ -109,11 +106,6 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        if (!radioCustomer.isChecked() && !radioSeller.isChecked()){
-              radioCustomer.setError("Please select your user type!");
-              radioCustomer.requestFocus();
-              return;
-        }
 
         mAuth.createUserWithEmailAndPassword(email, password)
                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -122,7 +114,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                    public void onComplete(@NonNull Task<AuthResult> task) {
 
                        if(task.isSuccessful()){
-                           User user = new User(fullName, username, email, type, phone);
+                           User user = new User(fullName, username, email, phone);
 
                            FirebaseDatabase.getInstance().getReference("users")
                                    .child(getInstance().getCurrentUser().getUid())
@@ -143,5 +135,10 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                        }
                    }
                });
+    }
+
+    @Override
+    public void onBackPressed() {
+        setContentView(R.layout.activity_main);
     }
 }

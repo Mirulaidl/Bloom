@@ -66,4 +66,9 @@ public class ForgotPassword extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        setContentView(R.layout.activity_main);
+    }
 }

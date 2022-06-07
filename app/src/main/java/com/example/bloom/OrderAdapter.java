@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Locale;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder> {
 
@@ -53,7 +54,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         double qt = Double.parseDouble(item.getQuantity());
         double ip = Double.parseDouble(item.getItemPrice());
         double tp = qt*ip;
-        String totalprice = String.valueOf(tp);
+        String totalprice = String.format(Locale.getDefault(),"%.2f",tp);
         holder.tvitemname.setText(item.getItemName());
         holder.tvitemprice.setText(item.getItemPrice());
         holder.tvitemprice.setText(totalprice);

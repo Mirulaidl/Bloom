@@ -12,7 +12,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/imageItem"
@@ -24,7 +25,7 @@
             android:text="CANGKUL"
             android:textStyle="bold"
             android:id="@+id/nameItem"
-            android:textColor="#2d2d2d"
+            android:textColor="#000000"
             android:textSize="13sp"
             android:gravity="center"
             android:layout_width="match_parent"
@@ -59,7 +60,7 @@
                 android:layout_height="22dp"
                 android:gravity="right"
                 android:text="RM"
-                android:textColor="#2d2d2d"
+                android:textColor="#000000"
                 android:textSize="13sp" />
             <TextView
                 android:text="20.00"

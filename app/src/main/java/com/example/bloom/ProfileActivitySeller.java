@@ -131,6 +131,12 @@ public class ProfileActivitySeller extends AppCompatActivity  {
         });
 
     }
-
+    int counter=0;
+    @Override
+    public void onBackPressed() {
+        counter ++;
+        if (counter==2)
+            super.onBackPressed();
+    }
 
 }
